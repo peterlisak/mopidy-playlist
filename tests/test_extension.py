@@ -1,5 +1,5 @@
-from mopidy_playlists import Extension
-from mopidy_playlists import frontend as frontend_lib
+from mopidy_playlist import Extension
+from mopidy_playlist import frontend as frontend_lib
 
 
 def test_get_default_config():
@@ -7,7 +7,7 @@ def test_get_default_config():
 
     config = ext.get_default_config()
 
-    assert "[playlists]" in config
+    assert "[playlist]" in config
     assert "enabled = true" in config
 
 

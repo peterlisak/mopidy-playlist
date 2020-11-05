@@ -1,20 +1,20 @@
 ****************************
-Mopidy-Playlists
+Mopidy-Playlist
 ****************************
 
-.. image:: https://img.shields.io/pypi/v/Mopidy-Playlists
-    :target: https://pypi.org/project/Mopidy-Playlists/
+.. image:: https://img.shields.io/pypi/v/Mopidy-Playlist
+    :target: https://pypi.org/project/Mopidy-Playlist/
     :alt: Latest PyPI version
 
-.. image:: https://img.shields.io/circleci/build/gh/peterlisak/mopidy-playlists
-    :target: https://circleci.com/gh/peterlisak/mopidy-playlists
+.. image:: https://img.shields.io/circleci/build/gh/peterlisak/mopidy-playlist
+    :target: https://circleci.com/gh/peterlisak/mopidy-playlist
     :alt: CircleCI build status
 
-.. image:: https://img.shields.io/codecov/c/gh/peterlisak/mopidy-playlists
-    :target: https://codecov.io/gh/peterlisak/mopidy-playlists
+.. image:: https://img.shields.io/codecov/c/gh/peterlisak/mopidy-playlist
+    :target: https://codecov.io/gh/peterlisak/mopidy-playlist
     :alt: Test coverage
 
-Mopidy extension for remote playlists expansion
+Mopidy extension for remote playlist expansion
 
 
 Installation
@@ -22,27 +22,27 @@ Installation
 
 Install by running::
 
-    python3 -m pip install Mopidy-Playlists
+    python3 -m pip install Mopidy-Playlist
 
-See https://mopidy.com/ext/playlists/ for alternative installation methods.
+See https://mopidy.com/ext/playlist/ for alternative installation methods.
 
 
 Configuration
 =============
 
 Before starting Mopidy, you must add configuration for
-Mopidy-Playlists to your Mopidy configuration file::
+Mopidy-Playlist to your Mopidy configuration file::
 
-    [playlists]
+    [playlist]
     # TODO: Add example of extension config
 
 
 Project resources
 =================
 
-- `Source code <https://github.com/peterlisak/mopidy-playlists>`_
-- `Issue tracker <https://github.com/peterlisak/mopidy-playlists/issues>`_
-- `Changelog <https://github.com/peterlisak/mopidy-playlists/blob/master/CHANGELOG.rst>`_
+- `Source code <https://github.com/peterlisak/mopidy-playlist>`_
+- `Issue tracker <https://github.com/peterlisak/mopidy-playlist/issues>`_
+- `Changelog <https://github.com/peterlisak/mopidy-playlist/blob/master/CHANGELOG.rst>`_
 
 
 Credits
@@ -50,4 +50,4 @@ Credits
 
 - Original author: `Peter Lisák <https://github.com/peterlisak>`__
 - Current maintainer: `Peter Lisák <https://github.com/peterlisak>`__
-- `Contributors <https://github.com/peterlisak/mopidy-playlists/graphs/contributors>`_
+- `Contributors <https://github.com/peterlisak/mopidy-playlist/graphs/contributors>`_
