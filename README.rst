@@ -14,7 +14,9 @@ Mopidy-Playlist
     :target: https://codecov.io/gh/peterlisak/mopidy-playlist
     :alt: Test coverage
 
-Mopidy extension for remote playlist expansion
+Mopidy extension for remote playlist expansion. Extension uses Mopidy's built-in
+playlist parsers to extract tracks from a remote playlist. Unlike Mopify-Stream,
+Mopidy-Playlist extract and add all tracks into playback queue.
 
 
 Installation
@@ -34,7 +36,9 @@ Before starting Mopidy, you must add configuration for
 Mopidy-Playlist to your Mopidy configuration file::
 
     [playlist]
-    # TODO: Add example of extension config
+    enabled = true
+    timeout = 1000
+    max_lookups = 100
 
 
 Project resources

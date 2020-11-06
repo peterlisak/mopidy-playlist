@@ -15,9 +15,8 @@ logger = logging.getLogger(__name__)
 class PlaylistBackend(pykka.ThreadingActor, backend.Backend):
     def __init__(self, config, audio):
         super(PlaylistBackend, self).__init__()
-
         self.scanner = scan.Scanner(
-            timeout=config["stream"]["timeout"], proxy_config=config["proxy"]
+            timeout=config["playlist"]["timeout"], proxy_config=config["proxy"]
         )
         self.session = http.get_requests_session(
             proxy_config=config["proxy"],
@@ -38,17 +37,19 @@ class PlaylistLibraryProvider(backend.LibraryProvider):
             url = uri[3:]
         elif uri.startswith("playlist:"):
             url = uri[9:]
+        else:
+            url = uri
 
         content = http.download(
             self.backend.session, url, timeout=self.backend.timeout / 1000
         )
 
         if content is None:
-            logger.info(
+            logger.warning(
                 "Error downloading URI %s while unwrapping playlist",
                 uri,
             )
-            return None
+            return []
         uris = playlists.parse(content)
         if not uris:
             logger.warning(

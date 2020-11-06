@@ -1,5 +1,7 @@
+from mopidy.ext import Registry
+
 from mopidy_playlist import Extension
-from mopidy_playlist import frontend as frontend_lib
+from mopidy_playlist import backend as backend_lib
 
 
 def test_get_default_config():
@@ -9,6 +11,8 @@ def test_get_default_config():
 
     assert "[playlist]" in config
     assert "enabled = true" in config
+    assert "timeout = 1000" in config
+    assert "max_lookups = 100" in config
 
 
 def test_get_config_schema():
@@ -16,9 +20,13 @@ def test_get_config_schema():
 
     schema = ext.get_config_schema()
 
-    # TODO Test the content of your config schema
-    # assert "username" in schema
-    # assert "password" in schema
+    assert "enabled" in schema
+    assert "timeout" in schema
+    assert "max_lookups" in schema
 
 
-# TODO Write more tests
+def test_setup():
+    ext = Extension()
+    registry = Registry()
+    ext.setup(registry)
+    assert backend_lib.PlaylistBackend in registry["backend"]
