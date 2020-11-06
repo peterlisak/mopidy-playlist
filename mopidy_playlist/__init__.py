@@ -2,7 +2,6 @@ import logging
 import pathlib
 
 import pkg_resources
-
 from mopidy import config, ext
 
 __version__ = pkg_resources.get_distribution("Mopidy-Playlist").version
@@ -27,4 +26,5 @@ class Extension(ext.Extension):
 
     def setup(self, registry):
         from .backend import PlaylistBackend
+
         registry.add("backend", PlaylistBackend)

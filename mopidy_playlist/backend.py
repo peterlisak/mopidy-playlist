@@ -1,7 +1,7 @@
 import logging
-import pykka
 import urllib
 
+import pykka
 from mopidy import backend, exceptions
 from mopidy.audio import scan, tags
 from mopidy.internal import http, playlists
@@ -21,7 +21,8 @@ class PlaylistBackend(pykka.ThreadingActor, backend.Backend):
         self.session = http.get_requests_session(
             proxy_config=config["proxy"],
             user_agent=(
-                f"{mopidy_playlist.Extension.dist_name}/{mopidy_playlist.Extension.version}"
+                f"{mopidy_playlist.Extension.dist_name}/"
+                f"{mopidy_playlist.Extension.version}"
             ),
         )
         self.timeout = config["playlist"]["timeout"]
@@ -63,27 +64,38 @@ class PlaylistLibraryProvider(backend.LibraryProvider):
             logger.debug("Found new URI %s in parsed playlist %s", u, uri)
             u = urllib.parse.urljoin(url, u)
             try:
-                scan_result = self.backend.scanner.scan(u, timeout=self.backend.timeout)
+                scan_result = self.backend.scanner.scan(
+                    u, timeout=self.backend.timeout
+                )
             except exceptions.ScannerError as exc:
-                logger.warning("GStreamer failed scanning URI (%s): %s %s", uri, exc, self.backend.timeout)
+                logger.warning(
+                    "GStreamer failed scanning URI (%s): %s %s",
+                    uri,
+                    exc,
+                    self.backend.timeout,
+                )
                 scan_result = None
 
             if scan_result:
                 has_interesting_mime = (
-                        scan_result.mime is not None
-                        and not scan_result.mime.startswith("text/")
-                        and not scan_result.mime.startswith("application/")
+                    scan_result.mime is not None
+                    and not scan_result.mime.startswith("text/")
+                    and not scan_result.mime.startswith("application/")
                 )
                 if scan_result.playable or has_interesting_mime:
                     logger.debug(
-                        "Unwrapped potential %s stream: %s", scan_result.mime, uri
+                        "Unwrapped potential %s stream: %s",
+                        scan_result.mime,
+                        uri,
                     )
-                    track = tags.convert_tags_to_track(scan_result.tags).replace(
-                        uri=u, length=scan_result.duration
-                    )
+                    track = tags.convert_tags_to_track(
+                        scan_result.tags
+                    ).replace(uri=u, length=scan_result.duration)
                 else:
                     logger.debug(
-                        "Unwrapped potential %s inner playlist: %s", scan_result.mime, uri
+                        "Unwrapped potential %s inner playlist: %s",
+                        scan_result.mime,
+                        uri,
                     )
                     track = Track(uri=uri)
             else:
