@@ -44,6 +44,7 @@ class PlaylistLibraryProvider(backend.LibraryProvider):
                 uri,
             )
             return []
+
         uris = playlists.parse(content)
         if not uris:
             logger.warning("Failed playlist from URI %s.", uri)
@@ -52,6 +53,7 @@ class PlaylistLibraryProvider(backend.LibraryProvider):
         return uris
 
     def _scan_track(self, uri):
+        """Identify playable tracks."""
         try:
             scan_result = self.backend.scanner.scan(
                 uri, timeout=self.backend.timeout
@@ -78,8 +80,11 @@ class PlaylistLibraryProvider(backend.LibraryProvider):
             )
             name = os.path.basename(urllib.parse.urlparse(uri).path)
             track = tags.convert_tags_to_track(scan_result.tags).replace(
-                uri=uri, name=name, length=scan_result.duration
+                uri=uri, length=scan_result.duration
             )
+            if not track.name:
+                track = track.replace(name=name)
+
             return track
         else:
             logger.warning(
@@ -87,6 +92,7 @@ class PlaylistLibraryProvider(backend.LibraryProvider):
                 scan_result.mime,
                 uri,
             )
+        return
 
     def lookup(self, uri):
         logger.info("Looking up playlist %s", uri)
