@@ -4,10 +4,10 @@ from unittest import mock
 import pytest
 import requests
 import responses
-
 from mopidy import exceptions
 from mopidy.audio import scan
 from mopidy.models import Track
+
 from mopidy_playlist import backend as backend_lib
 
 
